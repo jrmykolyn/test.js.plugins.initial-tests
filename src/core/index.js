@@ -14,6 +14,16 @@ class Core {
     });
   }
 
+  getPluginsByMethod(method) {
+    return this.plugins.filter((plugin) => typeof plugin[method] === 'function');
+  }
+
+  fetch(...args) {
+    const method = 'fetch';
+    this.getPluginsByMethod(method)
+      .forEach((plugin) => plugin[method](...args));
+  }
+
   write(...args) {
     this.plugins.filter((p) => typeof p.write === 'function')
       .forEach((p) => p.write(...args));
