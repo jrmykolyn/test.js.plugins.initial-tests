@@ -18,6 +18,12 @@ class Core {
     return this.plugins.filter((plugin) => typeof plugin[method] === 'function');
   }
 
+  cache(...args) {
+    const method = 'cache';
+    this.getPluginsByMethod(method)
+      .forEach((plugin) => plugin[method](...args));
+  }
+
   fetch(...args) {
     const method = 'fetch';
     this.getPluginsByMethod(method)
