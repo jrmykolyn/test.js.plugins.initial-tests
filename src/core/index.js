@@ -31,8 +31,9 @@ class Core {
   }
 
   write(...args) {
-    this.plugins.filter((p) => typeof p.write === 'function')
-      .forEach((p) => p.write(...args));
+    const method = 'write';
+    this.getPluginsByMethod(method)
+      .forEach((plugin) => plugin[method](...args));
   }
 }
 
